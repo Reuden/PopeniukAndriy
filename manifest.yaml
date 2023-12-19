@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: vodokanal_service
+spec:
+   strategy:
+    type: Recreate
+   selector:
+    matchLabels:
+      app: vodokanal_service
+   template:
+    metadata:
+      labels:
+        app: vodokanal_service
+    spec:
+      containers:
+      - name: vodokanal_servicee
+        image: skannte/vodokanal_service:latest
+        imagePullPolicy: Always
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Production
+        - name: vodokanal_service
+          value: /usr/data
+        ports:
+        - containerPort: 5012
+        volumeMounts:
+        - name: sqlite-volume
+          mountPath: /usr/data
+      volumes:
+      - name: sqlite-volume
+        persistentVolumeClaim:
+          claimName: sqlite-pvc
+
+  
