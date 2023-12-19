@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: vodokanal_servicee
-        image: skannte/vodokanal_service:latest
+        image: reuden/vodokanal_service:latest
         imagePullPolicy: Always
         env:
         - name: ASPNETCORE_ENVIRONMENT
